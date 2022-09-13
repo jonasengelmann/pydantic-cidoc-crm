@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import List, Optional, Union
 
-from abstract_basemodel import AbstractBaseModel
-from mapping import mapping
+from .abstract_basemodel import AbstractBaseModel
+from .mapping import mapping
 
 
 class RDFBaseModel(AbstractBaseModel):
