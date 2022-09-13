@@ -37,7 +37,7 @@ Will throw a validation error:
 ```console
 pydantic.error_wrappers.ValidationError: 1 validation error for E53Place
 p48_has_preferred_identifier
-  Must be E42Identifier (type=value_error)
+  Domain must be E42Identifier or a subclass of it. (type=value_error)
 ```
 
 

@@ -29,7 +29,7 @@ class AbstractBaseModel(BaseModel, abc.ABC):
         def validator(v: Any):
             if isinstance(v, cls):
                 return v
-            raise ValueError(f"Must be {cls.__name__}")
+            raise ValueError(f"Domain must be {cls.__name__} or a subclass of it.")
 
         yield validator
 
