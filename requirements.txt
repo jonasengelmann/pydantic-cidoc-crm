@@ -1,2 +1,16 @@
+cfgv==3.3.1
+distlib==0.3.6
+filelock==3.8.0
+identify==2.5.5
+isodate==0.6.1
+nodeenv==1.7.0
+platformdirs==2.5.2
+pre-commit==2.20.0
 pydantic==1.10.2
+pyparsing==3.0.9
+PyYAML==6.0
+rdflib==6.2.0
+six==1.16.0
+toml==0.10.2
 typing_extensions==4.3.0
+virtualenv==20.16.5
