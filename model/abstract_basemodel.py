@@ -1,6 +1,6 @@
 import abc
 import datetime
-from typing import Union
+from typing import Any, Union
 
 from pydantic import BaseModel, Field
 from rdflib import Literal, URIRef
@@ -23,6 +23,15 @@ class AbstractBaseModel(BaseModel, abc.ABC):
         validate_assignment = True
         extra = "forbid"
         arbitrary_types_allowed = True
+
+    @classmethod
+    def __get_validators__(cls):
+        def validator(v: Any):
+            if isinstance(v, cls):
+                return v
+            raise ValueError(f"Must be {cls.__name__}")
+
+        yield validator
 
     @staticmethod
     def _convert_to_rdf_literal(
