@@ -1,7 +1,9 @@
 ## Pydantic Cidoc-CRM Implementation
 [![License](https://img.shields.io/github/license/jonasengelmann/pydantic-cidoc-crm)](LICENSE)
 
-A Python implementation of Cidoc-CRM using pydantic and rdflib, that provides rigours type checking and safeguards against any typos.
+A Python implementation of Cidoc-CRM using pydantic and rdflib.
+
+Data modelling in conformity with Cidoc-CRM poses some challenges. Cidoc-CRM has a complex inheritance structure, from which specific range and domain restrictions are derived. Complying with these restrictions can be difficult at times. This package is an attempt to facilitate working with Cidoc-CRM in Python, as well as mitigate some of its challenges. By means of rigours type checking, domain and range are ensured to be correct at all times, as well as typos prevented that would hinder interoperability. 
 
 ## Usage
 
