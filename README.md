@@ -41,7 +41,7 @@ p48_has_preferred_identifier
 ```
 
 
-### Restriction of domain and safeguard against typos:
+### Restriction of range and safeguard against typos:
 
 ```python
 x = E53Place(
