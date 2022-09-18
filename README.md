@@ -30,8 +30,8 @@ from pydantic_cidoc_crm import E53Place, E41Appellation
 x = E53Place(
     iri="http:/localhost/a_place",
     p1_is_identified_by=E41Appellation(
-        iri="http:/localhost/a_place/appellation",
-        p190_has_symbolic_content=["Berlin"]
+        iri="http:/localhost/a_place/appellation/1",
+        p190_has_symbolic_content="Berlin"
     )
 )
 x.serialize()
@@ -44,13 +44,13 @@ x.serialize()
 <http:/localhost/a_place> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.cidoc-crm.org/cidoc-crm/E53_Place>
 ```
 
-### Restrictions of domain:
+### Domain restriction:
 ```python
 from pydantic_cidoc_crm import E53Place, E41Appellation
 x = E53Place(
     iri="http:/localhost/a_place",
     p48_has_preferred_identifier=E41Appellation(
-        iri="http:/localhost/a_place/identifier",
+        iri="http:/localhost/a_place/identifier/1",
         p190_has_symbolic_content="123"
     )
 )
@@ -63,14 +63,14 @@ p48_has_preferred_identifier
 ```
 
 
-### Restriction of range and safeguard against typos:
+### Range restriction and safeguarding against typos:
 
 ```python
 from pydantic_cidoc_crm import E53Place, E41Appellation
 x = E53Place(
     iri="http:/localhost/a_place",
     p1_is_identefied_by=E41Appellation(
-        iri="http:/localhost/a_place/appellation",
+        iri="http:/localhost/a_place/appellation/1",
         p190_has_symbolic_content="Berlin"
     )
 )
@@ -81,6 +81,25 @@ pydantic.error_wrappers.ValidationError: 1 validation error for E53Place
 p1_is_identefied_by
   extra fields not permitted (type=value_error.extra)
 ```
+
+
+### Subtyping
+
+Often there is the need to subtype from a Cidoc-CRM class. Here is an example how a subtyped class can be implemented.
+
+```python
+from typing import Optional
+from pydantic_cidoc_crm import E22HumanMadeObject, E39Actor
+
+class MyOwnClass(E22HumanMadeObject):
+    my_own_property: Optional[E39Actor] = None
+
+    def __init__(self, **data):
+        super().__init__(**data)
+        self._mapping["MyOwnClass"] = "http://www.localhost/ontology/MyOwnClass"
+        self._mapping["my_own_property"] = "http://www.localhost/ontology/my_own_property"
+```
+
 
 ## License
 
