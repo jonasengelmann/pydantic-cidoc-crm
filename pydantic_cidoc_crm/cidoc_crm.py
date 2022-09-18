@@ -11,6 +11,12 @@ class RDFBaseModel(AbstractBaseModel):
 
 
 class E1CRMEntity(RDFBaseModel):
+    p01i_is_domain_of: Optional[
+        Union[List[PC0TypedCRMProperty], PC0TypedCRMProperty]
+    ] = None
+    p02i_is_range_of: Optional[
+        Union[List[PC0TypedCRMProperty], PC0TypedCRMProperty]
+    ] = None
     p129i_is_subject_of: Optional[
         Union[List[E89PropositionalObject], E89PropositionalObject]
     ] = None
@@ -43,10 +49,15 @@ class E1CRMEntity(RDFBaseModel):
         Union[List[E89PropositionalObject], E89PropositionalObject]
     ] = None
     p70i_is_documented_in: Optional[Union[List[E31Document], E31Document]] = None
-
     p71i_is_listed_in: Optional[
         Union[List[E32AuthorityDocument], E32AuthorityDocument]
     ] = None
+
+
+class PC0TypedCRMProperty(RDFBaseModel):
+    p01_has_domain: Optional[Union[List[E1CRMEntity], E1CRMEntity]] = None
+    p02_has_range: Optional[Union[List[E1CRMEntity], E1CRMEntity]] = None
+    p03_has_range_literal: Optional[Union[List[str], str]] = None
 
 
 class E2TemporalEntity(E1CRMEntity):
@@ -206,6 +217,70 @@ class E92SpacetimeVolume(E1CRMEntity):
     ] = None
 
 
+class PC102hastitle(PC0TypedCRMProperty):
+    p102_1_has_type: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC107hascurrentorformermember(PC0TypedCRMProperty):
+    p107_1_kind_of_member: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC130showsfeaturesof(PC0TypedCRMProperty):
+    p130_1_kind_of_similarity: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC136wasbasedon(PC0TypedCRMProperty):
+    p136_1_in_the_taxonomic_role: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC137exemplifies(PC0TypedCRMProperty):
+    p137_1_in_the_taxonomic_role: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC138represents(PC0TypedCRMProperty):
+    p138_1_mode_of_representation: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC139hasalternativeform(PC0TypedCRMProperty):
+    p139_1_has_type: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC144joinedwith(PC0TypedCRMProperty):
+    p144_1_kind_of_member: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC14carriedoutby(PC0TypedCRMProperty):
+    p14_1_in_the_role_of: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC16usedspecificobject(PC0TypedCRMProperty):
+    p16_1_mode_of_use: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC189approximates(PC0TypedCRMProperty):
+    p189_1_has_type: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC19wasintendeduseof(PC0TypedCRMProperty):
+    p19_1_mode_of_use: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC3hasnote(PC0TypedCRMProperty):
+    p3_1_has_type: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC62depicts(PC0TypedCRMProperty):
+    p62_1_mode_of_depiction: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC67refersto(PC0TypedCRMProperty):
+    p67_1_has_type: Optional[Union[List[E55Type], E55Type]] = None
+
+
+class PC69hasassociationwith(PC0TypedCRMProperty):
+    p69_1_has_type: Optional[Union[List[E55Type], E55Type]] = None
+
+
 class E3ConditionState(E2TemporalEntity):
     p35i_was_identified_by: Optional[
         Union[List[E14ConditionAssessment], E14ConditionAssessment]
@@ -217,7 +292,7 @@ class E3ConditionState(E2TemporalEntity):
     p5i_forms_part_of: Optional[Union[List[E3ConditionState], E3ConditionState]] = None
 
 
-class E4Period(E2TemporalEntity, E92SpacetimeVolume):
+class E4Period(E92SpacetimeVolume, E2TemporalEntity):
     p7_took_place_at: Optional[Union[List[E53Place], E53Place]] = None
     p8_took_place_on_or_within: Optional[
         Union[List[E18PhysicalThing], E18PhysicalThing]
@@ -426,7 +501,7 @@ class E7Activity(E5Event):
     ] = None
 
 
-class E24PhysicalHumanMadeThing(E18PhysicalThing, E71HumanMadeThing):
+class E24PhysicalHumanMadeThing(E71HumanMadeThing, E18PhysicalThing):
     p108i_was_produced_by: Optional[Union[List[E12Production], E12Production]] = None
     p110i_was_augmented_by: Optional[
         Union[List[E79PartAddition], E79PartAddition]
@@ -442,7 +517,7 @@ class E28ConceptualObject(E71HumanMadeThing):
     p94i_was_created_by: Optional[Union[List[E65Creation], E65Creation]] = None
 
 
-class E90SymbolicObject(E28ConceptualObject, E72LegalObject):
+class E90SymbolicObject(E72LegalObject, E28ConceptualObject):
     p106_is_composed_of: Optional[
         Union[List[E90SymbolicObject], E90SymbolicObject]
     ] = None
@@ -466,7 +541,7 @@ class E11Modification(E7Activity):
     p31_has_modified: Optional[Union[List[E18PhysicalThing], E18PhysicalThing]] = None
 
 
-class E12Production(E11Modification, E63BeginningofExistence):
+class E12Production(E63BeginningofExistence, E11Modification):
     p108_has_produced: Optional[
         Union[List[E24PhysicalHumanMadeThing], E24PhysicalHumanMadeThing]
     ] = None
@@ -475,13 +550,13 @@ class E12Production(E11Modification, E63BeginningofExistence):
     ] = None
 
 
-class E65Creation(E7Activity, E63BeginningofExistence):
+class E65Creation(E63BeginningofExistence, E7Activity):
     p94_has_created: Optional[
         Union[List[E28ConceptualObject], E28ConceptualObject]
     ] = None
 
 
-class E66Formation(E7Activity, E63BeginningofExistence):
+class E66Formation(E63BeginningofExistence, E7Activity):
     p151_was_formed_from: Optional[Union[List[E74Group], E74Group]] = None
     p95_has_formed: Optional[Union[List[E74Group], E74Group]] = None
 
@@ -492,7 +567,7 @@ class E67Birth(E63BeginningofExistence):
     p98_brought_into_life: Optional[Union[List[E21Person], E21Person]] = None
 
 
-class E81Transformation(E63BeginningofExistence, E64EndofExistence):
+class E81Transformation(E64EndofExistence, E63BeginningofExistence):
     p123_resulted_in: Optional[Union[List[E18PhysicalThing], E18PhysicalThing]] = None
     p124_transformed: Optional[Union[List[E18PhysicalThing], E18PhysicalThing]] = None
 
@@ -551,7 +626,7 @@ class E9Move(E7Activity):
     p27_moved_from: Optional[Union[List[E53Place], E53Place]] = None
 
 
-class E22HumanMadeObject(E24PhysicalHumanMadeThing, E19PhysicalObject):
+class E22HumanMadeObject(E19PhysicalObject, E24PhysicalHumanMadeThing):
     pass
 
 
@@ -740,11 +815,11 @@ class E36VisualItem(E73InformationObject):
     ] = None
 
 
-class E33E41LinguisticAppellation(E33LinguisticObject, E41Appellation):
+class E33E41LinguisticAppellation(E41Appellation, E33LinguisticObject):
     pass
 
 
-class E35Title(E41Appellation, E33LinguisticObject):
+class E35Title(E33LinguisticObject, E41Appellation):
     p102i_is_title_of: Optional[
         Union[List[E71HumanMadeThing], E71HumanMadeThing]
     ] = None
@@ -780,7 +855,7 @@ class E37Mark(E36VisualItem):
     pass
 
 
-class E34Inscription(E37Mark, E33LinguisticObject):
+class E34Inscription(E33LinguisticObject, E37Mark):
     pass
 
 
@@ -791,6 +866,22 @@ E53Place.update_forward_refs()
 E54Dimension.update_forward_refs()
 E77PersistentItem.update_forward_refs()
 E92SpacetimeVolume.update_forward_refs()
+PC102hastitle.update_forward_refs()
+PC107hascurrentorformermember.update_forward_refs()
+PC130showsfeaturesof.update_forward_refs()
+PC136wasbasedon.update_forward_refs()
+PC137exemplifies.update_forward_refs()
+PC138represents.update_forward_refs()
+PC139hasalternativeform.update_forward_refs()
+PC144joinedwith.update_forward_refs()
+PC14carriedoutby.update_forward_refs()
+PC16usedspecificobject.update_forward_refs()
+PC189approximates.update_forward_refs()
+PC19wasintendeduseof.update_forward_refs()
+PC3hasnote.update_forward_refs()
+PC62depicts.update_forward_refs()
+PC67refersto.update_forward_refs()
+PC69hasassociationwith.update_forward_refs()
 E3ConditionState.update_forward_refs()
 E4Period.update_forward_refs()
 E97MonetaryAmount.update_forward_refs()
