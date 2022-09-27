@@ -75,7 +75,7 @@ x = E53Place(
     )
 )
 ```
-Will throw a validation error:
+Will throw a validation error (notice the typo):
 ```console
 pydantic.error_wrappers.ValidationError: 1 validation error for E53Place
 p1_is_identefied_by
@@ -83,9 +83,9 @@ p1_is_identefied_by
 ```
 
 
-### Subtyping
+### Subclassing
 
-Often there is the need to subtype from a Cidoc-CRM class. Here is an example how a subtyped class can be implemented.
+Often there is the need to subclass from a Cidoc-CRM class. Here is an example showing how a subclass can be implemented.
 
 ```python
 from typing import Optional
