@@ -1,8 +1,8 @@
 cff-version: 1.1.0
 message: "If you use this software, please cite it as below."
 authors:
-  - family-names: Jonas
-    given-names: Engelmann
+  - family-names: Engelmann
+    given-names: Jonas
     orcid: https://orcid.org/0000-0002-1485-7879
 title: Pydantic Cidoc-CRM Implementation
 version: 0.0.3
