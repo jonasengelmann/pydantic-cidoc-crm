@@ -4,6 +4,8 @@ authors:
   - family-names: Jonas
     given-names: Engelmann
     orcid: https://orcid.org/0000-0002-1485-7879
-title: jonasengelmann/pydantic-cidoc-crm: v.0.0.3
+title: Pydantic Cidoc-CRM Implementation
 version: 0.0.3
+doi: 10.5281/zenodo.7942634
+repository-code: "https://github.com/jonasengelmann/pydantic-cidoc-crm"
 date-released: 2023-05-16
